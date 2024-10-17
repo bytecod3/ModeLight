@@ -88,3 +88,34 @@ function led2on(){
 function led2off(){
     websocket.send('led2off');
 }
+
+////////////////// LEVEL 1 
+// RED
+function ledR1on() {
+    websocket.send('ledR1on')
+}
+
+function ledR1off() {
+    websocket.send('ledR1off')
+}
+
+// GREEN
+function ledG1on() {
+    websocket.send('ledG1on')
+}
+
+function ledG1off() {
+    websocket.send('ledG1off')
+}
+
+// BLUE
+function ledB1on() {
+    websocket.send('ledB1on')
+}
+
+function ledB1off() {
+    websocket.send('ledB1off')
+}
+
+// LEVEL 2
+
