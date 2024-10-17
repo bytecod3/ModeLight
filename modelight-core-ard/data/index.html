@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>ModeLight v1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+
+
+        <div class="topnav" style="position: relative">
+            <h1 style="position: sticky; top: 0">ModeLight v1.0 </h1>
+        </div>  
+
+        <div class="content">
+
+            <div class="process-leds">
+                <h4>RGB Strip Control</h4>
+
+                <!-- Level 1 -->
+                <div class="card">
+                    <h2 style="font-weight: lighter">Level 1</h2>
+                    <p class="state">State: <span class="state" id="led1state"></span></p>
+
+                    <p>
+                        <button id="led1on" class="on button_on_off" onclick="led1on(this)">ON  </button>
+                        <button id="led1off" class="off button_on_off" onclick="led1off(this)">OFF</button>
+                        <button id="led2off" class="r button" onclick="led2off(this)" >R</button>
+                        <button id="led2off" class="g button" onclick="led2off(this)" >G</button>
+                        <button id="led2off" class="b button" onclick="led2off(this)" >B</button>
+                    </p>
+
+                </div>
+
+                <!-- Level 2 -->
+                <div class="card">
+                    <h2 style="font-weight: lighter">Level 2</h2>
+                    <p class="state">State: <span class="state" id="led2state"></span></p>
+
+                    <p>
+                        <button id="led2on" class="on button_on_off" onclick="led2on(this)" >ON</button>
+                        <button id="led2off" class="off button_on_off" onclick="led2off(this)" >OFF</button>
+                        <button id="led2off" class="r button" onclick="led2off(this)" >R</button>
+                        <button id="led2off" class="g button" onclick="led2off(this)" >G</button>
+                        <button id="led2off" class="b button" onclick="led2off(this)" >B</button>
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="card">
+                <h2 style="font-weight: lighter">Level 3</h2>
+                <p class="state">State: <span class="state" id="led1state"></span></p>
+
+                <p>
+                    <button id="led1on" class="on button_on_off" onclick="led1on(this)">ON  </button>
+                    <button id="led1off" class="off button_on_off" onclick="led1off(this)">OFF</button>
+                    <button id="led2off" class="r button" onclick="led2off(this)" >R</button>
+                    <button id="led2off" class="g button" onclick="led2off(this)" >G</button>
+                    <button id="led2off" class="b button" onclick="led2off(this)" >B</button>
+                </p>
+
+            </div>
+<!-- 
+            <div class="servo-control">
+                <div class="card">
+                    <h4 style="font-weight: lighter">Servo Motor Control</h4>
+
+                    <p class="state">Current Position: <span class="state" id="servo_value"></span> deg</p>
+
+                    <p>
+                        <label for="servo">Enter  angle to set:</label>
+                        <input type="number" name="serv-deg" id="servo" min="0" max="180" step="1">
+
+                        <button class="servo-set servo" id="setservoangle" onclick="updateServoAngle(this)">Set</button>
+                    </p>
+
+                </div>
+
+            </div> -->
+        </div>
+
+        <script src="main.js"></script>
+</body>
+</html>
