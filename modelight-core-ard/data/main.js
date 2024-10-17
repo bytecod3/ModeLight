@@ -69,7 +69,7 @@ function updateServoAngle(){
     LED controls
  */
 
-// led 1 on
+// LEVEL 1 ALL ON
 function led1on(){
     websocket.send('led1on');
 }
@@ -77,16 +77,6 @@ function led1on(){
 // led 1 off
 function led1off(){
     websocket.send('led1off');
-}
-
-// led 2 on
-function led2on(){
-    websocket.send('led2on');
-}
-
-// led 2 off
-function led2off(){
-    websocket.send('led2off');
 }
 
 ////////////////// LEVEL 1 
@@ -118,4 +108,5 @@ function ledB1off() {
 }
 
 // LEVEL 2
+
 

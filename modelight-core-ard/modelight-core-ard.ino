@@ -88,29 +88,60 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 	  message = (char*)data;
 
     // check the message received depending on what was sent from the web page
+    ///////////////// LEVEL 1 /////////////////////////////////
     if(strcmp((char*)data, "led1on") == 0){
+      digitalWrite(LEVEL1_R, HIGH);
+      digitalWrite(LEVEL1_G, HIGH);
+      digitalWrite(LEVEL1_B, HIGH);
+      process1_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "led1off") == 0){
+      digitalWrite(LEVEL1_R, LOW);
+      digitalWrite(LEVEL1_G, LOW);
+      digitalWrite(LEVEL1_B, LOW);
+      process1_led_state = "OFF";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledR1on") == 0){
       digitalWrite(LEVEL1_R, HIGH);
       process1_led_state = "ON";
       // notifyClients(getProcessData());
     }
 	  
-	  if(strcmp((char*)data, "led1off") == 0){
+	  if(strcmp((char*)data, "ledR1off") == 0){
       digitalWrite(LEVEL1_R, LOW);
       process1_led_state = "OFF";
       // notifyClients(getProcessData());
     }
 	  
-	  if(strcmp((char*)data, "led2on") == 0){
-		  digitalWrite(process2_led, HIGH);
+	  if(strcmp((char*)data, "ledG1on") == 0){
+		  digitalWrite(LEVEL1_G, HIGH);
       process2_led_state = "ON";
       // notifyClients(getProcessData());
     }
 	  
-	  if(strcmp((char*)data, "led2off") == 0){
-      digitalWrite(process2_led, LOW);
+	  if(strcmp((char*)data, "ledG1off") == 0){
+      digitalWrite(LEVEL1_G, LOW);
       process2_led_state = "OFF";
       // notifyClients(getServoValues());
     }
+
+    if(strcmp((char*)data, "ledB1on") == 0){
+      digitalWrite(LEVEL1_B, HIGH);
+      process2_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledB1off") == 0){
+      digitalWrite(LEVEL1_B, LOW);
+      process2_led_state = "OFF";
+      // notifyClients(getServoValues());
+    }
+
+    ///////////////// END OF LEVEL 1 /////////////////////////////////
       
   }
 
@@ -190,5 +221,3 @@ void setup() {
 void loop() {
   ws.cleanupClients();
 }
-
-
