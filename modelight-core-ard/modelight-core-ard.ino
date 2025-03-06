@@ -10,12 +10,13 @@
 #define LEVEL1_B 18
 #define LEVEL2_R 15
 #define LEVEL2_G 14
-#define LEVEL2_B 13
+#define LEVEL2_B 27
 #define LEVEL3_R 12
 #define LEVEL3_G 5
-#define LEVEL3_B 4
+#define LEVEL3_B 16
+#define LVL_G 26
 
-#define NUM_LEDS 9
+#define NUM_LEDS 10
 
 uint8_t led_array[NUM_LEDS] = {
   LEVEL1_R,
@@ -25,7 +26,9 @@ uint8_t led_array[NUM_LEDS] = {
   LEVEL2_G,
   LEVEL2_B,
   LEVEL3_R,
-  LEVEL3_B
+  LEVEL3_G,
+  LEVEL3_B,
+  LVL_G
 };
 
 /**
@@ -44,8 +47,9 @@ void init_hw(void) {
 }
 
 // Replace with your network credentials
-const char* SSID = "Eduh";
-const char* PASSWORD = "password2";
+//const char* SSID = "Eduh";
+//const char* PASSWORD = "password2";
+const char* SSID = "AJMAL HOMES MODEL";
 
 // pin assignments
 String process1_led_state = "OFF";
@@ -142,7 +146,123 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     }
 
     ///////////////// END OF LEVEL 1 /////////////////////////////////
-      
+
+
+
+    ///////////////// LEVEL 2 /////////////////////////////////
+    if(strcmp((char*)data, "led2on") == 0){
+      digitalWrite(LEVEL2_R, HIGH);
+      digitalWrite(LEVEL2_G, HIGH);
+      digitalWrite(LEVEL2_B, HIGH);
+      process1_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "led2off") == 0){
+      digitalWrite(LEVEL2_R, LOW);
+      digitalWrite(LEVEL2_G, LOW);
+      digitalWrite(LEVEL2_B, LOW);
+      process1_led_state = "OFF";
+      // notifyClients(getProcessData());
+    }
+
+    if(strcmp((char*)data, "ledR2on") == 0){
+      digitalWrite(LEVEL2_R, HIGH);
+      process1_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledR2off") == 0){
+      digitalWrite(LEVEL2_R, LOW);
+      process1_led_state = "OFF";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledG2on") == 0){
+      digitalWrite(LEVEL2_G, HIGH);
+      process2_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledG2off") == 0){
+      digitalWrite(LEVEL2_G, LOW);
+      process2_led_state = "OFF";
+      // notifyClients(getServoValues());
+    }
+
+    if(strcmp((char*)data, "ledB2on") == 0){
+      digitalWrite(LEVEL2_B, HIGH);
+      process2_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledB2off") == 0){
+      digitalWrite(LEVEL2_B, LOW);
+      process2_led_state = "OFF";
+      // notifyClients(getServoValues());
+    }
+
+
+    ///////////////// END OF LEVEL 2 /////////////////////////////////
+
+
+
+    ///////////////// LEVEL 3 /////////////////////////////////
+    if(strcmp((char*)data, "led3on") == 0){
+      digitalWrite(LEVEL3_R, HIGH);
+      digitalWrite(LEVEL3_G, HIGH);
+      digitalWrite(LEVEL3_B, HIGH);
+      process1_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "led3off") == 0){
+      digitalWrite(LEVEL3_R, LOW);
+      digitalWrite(LEVEL3_G, LOW);
+      digitalWrite(LEVEL3_B, LOW);
+      process1_led_state = "OFF";
+      // notifyClients(getProcessData());
+    }
+
+    if(strcmp((char*)data, "ledR3on") == 0){
+      digitalWrite(LEVEL3_R, HIGH);
+      process1_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledR3off") == 0){
+      digitalWrite(LEVEL3_R, LOW);
+      process1_led_state = "OFF";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledG3on") == 0){
+      digitalWrite(LEVEL3_G, HIGH);
+      process2_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledG3off") == 0){
+      digitalWrite(LEVEL3_G, LOW);
+      process2_led_state = "OFF";
+      // notifyClients(getServoValues());
+    }
+
+    if(strcmp((char*)data, "ledB3on") == 0){
+      digitalWrite(LEVEL3_B, HIGH);
+      process2_led_state = "ON";
+      // notifyClients(getProcessData());
+    }
+    
+    if(strcmp((char*)data, "ledB3off") == 0){
+      digitalWrite(LEVEL3_B, LOW);
+      process2_led_state = "OFF";
+      // notifyClients(getServoValues());
+    }
+
+
+    ///////////////// END OF LEVEL 3 /////////////////////////////////
+
   }
 
 }
@@ -182,17 +302,20 @@ void initSPIFFS(){
 
 void initWIFI(){
   // Connect to Wi-Fi
-  WiFi.begin(SSID, PASSWORD);
+//  WiFi.begin(SSID, PASSWORD);
+
+  WiFi.softAP(SSID);
   
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to wi-fi..");
-  }
+//  while (WiFi.status() != WL_CONNECTED) {
+//    delay(1000);
+//    Serial.println("Connecting to wi-fi..");
+//  }
 
   // Print ESP Local IP Address
   Serial.println(WiFi.localIP());
 
 }
+
 
 void setup() {
   Serial.begin(115200);

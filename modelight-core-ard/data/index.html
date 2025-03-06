@@ -5,6 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script src="main.js"></script> -->
+
+    <script type = "text/javascript">
+        var gateway = `ws://${window.location.hostname}/ws`;
+
+            var websocket;
+
+            // listen for web page event
+            window.addEventListener('load', onLoad);
+
+            // initialize web socket on web page load
+            function onLoad(event) {
+                initWebSocket();
+            }
+
+            // initialize web socket function
+            function initWebSocket() {
+                console.log('Opening WebSocket connection...');
+                websocket = new WebSocket(gateway);
+                websocket.onopen    = onOpen;
+                websocket.onclose   = onClose;
+                // websocket.onmessage = onMessage;
+            }
+
+            // if a new client connects
+            function onOpen(event) {
+                console.log('Connection opened');
+            }
+
+            // if a client disconnects
+            function onClose(event) {
+                console.log('Connection closed');
+                setTimeout(initWebSocket, 2000);
+            }
+
+            // // process a newly received message
+            // function onMessage(event) {
+            //     // convert received data to JSON
+            //     console.log(event.data);
+            //     let message_object = JSON.parse(event.data);
+            //     let message_keys = Object.keys(message_object);
+
+            //     for (let i = 0; i < message_keys.length; i++){
+            //         let key = message_keys[i];
+
+            //         // get the LED IDs and set the current state value e.g key=>led1 : value=> 1
+            //         document.getElementById(key).innerHTML = message_object[key];
+            //     }
+
+            //     console.log(message_object);
+            // }
+
+
+            /*
+                LED controls
+            */
+
+            // LEVEL 1 ALL ON
+            function led1on() {
+                websocket.send('led1on');
+            }
+
+            // led 1 off
+            function led1off(){
+                websocket.send('led1off');
+            }
+
+            function led2on(){
+                websocket.send('led2on');
+            }
+
+            // led 2 off
+            function led2off(){
+                websocket.send('led2off');
+            }
+
+            function led3on(){
+                websocket.send('led3on');
+            }
+
+            // led 1 off
+            function led3off(){
+                websocket.send('led3off');
+            }
+
+            ////////////////// LEVEL 1 ////////////////// 
+            // RED
+            function ledR1on() {
+                websocket.send('ledR1on')
+            }
+
+            function ledR1off() {
+                websocket.send('ledR1off')
+            }
+
+            // GREEN
+            function ledG1on() {
+                websocket.send('ledG1on')
+            }
+
+            function ledG1off() {
+                websocket.send('ledG1off')
+            }
+
+            // BLUE
+            function ledB1on() {
+                websocket.send('ledB1on')
+            }
+
+            function ledB1off() {
+                websocket.send('ledB1off')
+            }
+
+
+
+            ////////////////// LEVEL 2 ////////////////// 
+            // RED
+            function ledR2on() {
+                websocket.send('ledR2on')
+            }
+
+            function ledR2off() {
+                websocket.send('ledR2off')
+            }
+
+            // GREEN
+            function ledG2on() {
+                websocket.send('ledG2on')
+            }
+
+            function ledG2off() {
+                websocket.send('ledG2off')
+            }
+
+            // BLUE
+            function ledB2on() {
+                websocket.send('ledB2on')
+            }
+
+            function ledB2off() {
+                websocket.send('ledB2off')
+            }
+
+            ////////////////// LEVEL 3 ////////////////// 
+            // RED
+            function ledR3on() {
+                websocket.send('ledR3on')
+            }
+
+            function ledR3off() {
+                websocket.send('ledR3off')
+            }
+
+            // GREEN
+            function ledG3on() {
+                websocket.send('ledG3on')
+            }
+
+            function ledG3off() {
+                websocket.send('ledG3off')
+            }
+
+            // BLUE
+            function ledB3on() {
+                websocket.send('ledB3on')
+            }
+
+            function ledB3off() {
+                websocket.send('ledB3off')
+            }
+
+    </script>
 
 </head>
 
@@ -32,18 +204,18 @@
                         </div>
                         
                         <div style="margin-bottom: 10px;">
-                            <button id="led2off" class="r button" onclick="ledR1on(this)" >R on</button>
-                            <button id="led2off" class="r button" onclick="ledR1off(this)" >R off</button>
+                            <button class="r button" onclick="ledR1on(this)" >R on</button>
+                            <button  class="r button" onclick="ledR1off(this)" >R off</button>
                         </div>
 
                         <div style="margin-bottom: 10px;">
-                            <button id="led2off" class="g button" onclick="ledG1on(this)" >G on</button>
-                            <button id="led2off" class="g button" onclick="ledG1off(this)" >B off</button>
+                            <button class="g button" onclick="ledG1on(this)" >G on</button>
+                            <button class="g button" onclick="ledG1off(this)" >G off</button>
                         </div>
 
                         <div style="margin-bottom: 10px;">
-                            <button id="led2off" class="r button" onclick="ledB1on(this)" >B on</button>
-                            <button id="led2off" class="r button" onclick="ledB1off(this)" >B off</button>
+                            <button  class="r button" onclick="ledB1on(this)" >B on</button>
+                            <button  class="r button" onclick="ledB1off(this)" >B off</button>
                         </div>
                     </p>
 
@@ -52,18 +224,31 @@
                 <!-- Level 2 -->
                 <div class="card">
                     <h2 style="font-weight: lighter">Level 2</h2>
-                    <!-- <p class="state">State: <span class="state" id="led2state"></span></p> -->
+                    <!-- <p class="state">State: <span class="state" id="led1state"></span></p> -->
 
                     <p>
-                        <button id="led2on" class="on button_on_off" onclick="led2on(this)" >ON</button>
-                        <button id="led2off" class="off button_on_off" onclick="led2off(this)" >OFF</button>
-                        <button id="led2off" class="r button" onclick="led2off(this)" >R</button>
-                        <button id="led2off" class="g button" onclick="led2off(this)" >G</button>
-                        <button id="led2off" class="b button" onclick="led2off(this)" >B</button>
+                        <div style="margin-bottom: 10px;">
+                            <button class="on button_on_off" onclick="led2on(this)"> ALL ON  </button>
+                            <button  class="off button_on_off" onclick="led2off(this)">ALL OFF</button>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <button class="r button" onclick="ledR2on(this)" >R on</button>
+                            <button class="r button" onclick="ledR2off(this)" >R off</button>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <button  class="g button" onclick="ledG2on(this)" >G on</button>
+                            <button class="g button" onclick="ledG2off(this)" >G off</button>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <button  class="r button" onclick="ledB2on(this)" >B on</button>
+                            <button  class="r button" onclick="ledB2off(this)" >B off</button>
+                        </div>
                     </p>
 
                 </div>
-            </div>
 
             <!-- Level 3 -->
             <div class="card">
@@ -71,33 +256,33 @@
                 <!-- <p class="state">State: <span class="state" id="led1state"></span></p> -->
 
                 <p>
-                    <button id="led1on" class="on button_on_off" onclick="led1on(this)">ON  </button>
-                    <button id="led1off" class="off button_on_off" onclick="led1off(this)">OFF</button>
-                    <button id="led2off" class="r button" onclick="led2off(this)" >R</button>
-                    <button id="led2off" class="g button" onclick="led2off(this)" >G</button>
-                    <button id="led2off" class="b button" onclick="led2off(this)" >B</button>
+                    <div style="margin-bottom: 10px;">
+                        <button class="on button_on_off" onclick="led3on(this)"> ALL ON  </button>
+                        <button  class="off button_on_off" onclick="led3off(this)">ALL OFF</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <button class="r button" onclick="ledR3on(this)" >R on</button>
+                        <button class="r button" onclick="ledR3off(this)" >R off</button>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <button  class="g button" onclick="ledG3on(this)" >G on</button>
+                        <button  class="g button" onclick="ledG3off(this)" >G off</button>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <button  class="r button" onclick="ledB3on(this)" >B on</button>
+                        <button  class="r button" onclick="ledB3off(this)" >B off</button>
+                    </div>
                 </p>
-
             </div>
-<!-- 
-            <div class="servo-control">
-                <div class="card">
-                    <h4 style="font-weight: lighter">Servo Motor Control</h4>
 
-                    <p class="state">Current Position: <span class="state" id="servo_value"></span> deg</p>
+            <!--  end of level 3 -->
 
-                    <p>
-                        <label for="servo">Enter  angle to set:</label>
-                        <input type="number" name="serv-deg" id="servo" min="0" max="180" step="1">
 
-                        <button class="servo-set servo" id="setservoangle" onclick="updateServoAngle(this)">Set</button>
-                    </p>
-
-                </div>
-
-            </div> -->
         </div>
 
-        <script src="main.js"></script>
+        
 </body>
 </html>
